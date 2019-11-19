@@ -289,7 +289,8 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
         }
         SEL selector = @selector(resume);
         SEL swizzledSelector = [FLEXUtility swizzledSelectorForSelector:selector];
-
+        
+        class = NSClassFromString(@"__NSCFLocalDataTask");
         Method originalResume = class_getInstanceMethod(class, selector);
 
         void (^swizzleBlock)(NSURLSessionTask *) = ^(NSURLSessionTask *slf) {
